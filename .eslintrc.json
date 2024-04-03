@@ -1,20 +1,26 @@
 {
-  "extends": ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
-  "ignorePatterns": [
-      "node_modules/",
-      "next.config.js",
-      "next-env.d.ts",
-      "./public/js"
-
-  ],
-  "rules": {
-      "@next/next/no-img-element": "off",
-      "jsx-a11y/alt-text": "off",
-      "react-hooks/exhaustive-deps": "off",
-      "indent": ["error", 4],
-      "linebreak-style": "off",
-      "quotes": ["error", "single"],
-      "semi": ["error", "never"],
-      "comma-dangle": ["error", "never"]
-  }
+    "extends": [
+        "next",
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "prettier"
+    ],
+    "ignorePatterns": [
+        "node_modules/",
+        "next.config.js",
+        "next-env.d.ts",
+        "./public/js"
+    ],
+    "rules": {
+        "@next/next/no-img-element": "off",
+        "jsx-a11y/alt-text": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "indent": ["error", 4],
+        "linebreak-style": "off",
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"],
+        "comma-dangle": ["error", "never"]
+    }
 }
