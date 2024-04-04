@@ -1,6 +1,6 @@
 # House Care Service App
 
-<p>Welcome to the House Care Service App - your one-stop solution for booking house care services directly from your device. This application offers a wide range of services, including Cleaning, Repairing, Painting, Shifting, Plumbing, and Electrical services, ensuring your home care needs are met with professionalism and ease.</p>
+<h5>Welcome to the House Care Service App - your one-stop solution for booking house care services directly from your device. This application offers a wide range of services, including Cleaning, Repairing, Painting, Shifting, Plumbing, and Electrical services, ensuring your home care needs are met with professionalism and ease.</h5>
 
 <h2>Features</h2>
 
