@@ -28,6 +28,11 @@ function Header() {
         }
     }
 
+    const handleLogout = async () => {
+        await signOut()
+        window.location.href = '/'
+    }
+
     return (
         <div
             className="py-5 px-5 md:px-16 shadow-md flex justify-between items-center
@@ -72,9 +77,9 @@ function Header() {
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <Link href={'/bookings'}>My Bookings</Link>
+                                <Link href={'/mybooking'}>My Bookings</Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => signOut()}>
+                            <DropdownMenuItem onClick={handleLogout}>
                                 Logout
                             </DropdownMenuItem>
                         </DropdownMenuContent>

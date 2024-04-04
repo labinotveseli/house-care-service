@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import {
     Sheet,
@@ -28,8 +29,10 @@ function BookingSection({ children, business }) {
     }, [])
 
     useEffect(() => {
-        date && BusinessBookedSlot()
-    }, [date])
+        if (business) {
+            BusinessBookedSlot()
+        }
+    }, [date, business])
 
     /**
      * Get Selected Date Business Booked Slot
@@ -38,10 +41,14 @@ function BookingSection({ children, business }) {
         GlobalApi.BusinessBookedSlot(
             business.id,
             moment(date).format('DD-MMM-yyyy')
-        ).then((resp) => {
-            console.log(resp)
-            setBookedSlot(resp.bookings)
-        })
+        )
+            .then((resp) => {
+                console.log(resp)
+                setBookedSlot(resp.bookings)
+            })
+            .catch((error) => {
+                console.error('Error fetching booked slots:', error)
+            })
     }
 
     const getTime = () => {
@@ -83,7 +90,7 @@ function BookingSection({ children, business }) {
                     // Toast Msg
                 }
             },
-            (e) => {
+            () => {
                 toast('Error while creating booking')
                 //Error Toast Msg
             }
@@ -97,30 +104,30 @@ function BookingSection({ children, business }) {
         <div>
             <Sheet>
                 <SheetTrigger asChild>{children}</SheetTrigger>
-                <SheetContent className="overflow-auto mt-2 sm:mt-0">
+                <SheetContent className='overflow-auto mt-2 sm:mt-0'>
                     <SheetHeader>
                         <SheetTitle>Book a Service</SheetTitle>
                         <SheetDescription>
                             Select Date and Time slot to book a service
-                            <div className="flex flex-col gap-5 items-baseline">
-                                <h2 className="mt-5 font-bold">Select Date</h2>
+                            <div className='flex flex-col gap-5 items-baseline'>
+                                <h2 className='mt-5 font-bold'>Select Date</h2>
                                 <Calendar
-                                    mode="single"
+                                    mode='single'
                                     selected={date}
                                     onSelect={setDate}
-                                    className="rounded-md border"
+                                    className='rounded-md border'
                                 />
                             </div>
                             {/* Time Slot Picker  */}
-                            <h2 className="mt-10 mb-4 font-bold">
+                            <h2 className='mt-10 mb-4 font-bold'>
                                 Select Time Slot
                             </h2>
-                            <div className="grid grid-cols-3 gap-3">
+                            <div className='grid grid-cols-3 gap-3'>
                                 {timeSlot.map((item, index) => (
                                     <Button
                                         key={index}
                                         disabled={isSlotBooked(item.time)}
-                                        variant="outiline"
+                                        variant='outiline'
                                         className={`border rounded-md 
                 p-2 px-8 hover:bg-primary
                  hover:text-white
@@ -135,10 +142,10 @@ function BookingSection({ children, business }) {
                             </div>
                         </SheetDescription>
                     </SheetHeader>
-                    <SheetFooter className="mt-5">
+                    <SheetFooter className='mt-5'>
                         <SheetClose asChild>
-                            <div className="flex gap-5">
-                                <Button variant="destructive" className="">
+                            <div className='flex gap-5'>
+                                <Button variant='destructive' className=''>
                                     Cancel
                                 </Button>
 

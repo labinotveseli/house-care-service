@@ -1,89 +1,56 @@
 'use client'
-
 import GlobalApi from '@/app/_services/GlobalApi'
-import { Button } from '@/components/ui/button'
-import { NotebookPen } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { signIn, useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from '@/components/ui/sheet'
-import BookingSection from './BookingSection'
+import BusinessInfo from '../_components/BusinessInfo'
+import SuggestedBusinessList from '../_components/SuggestedBusinessList'
+import BusinessDescription from '../_components/BusinessDescription'
 
-function SuggestedBusinessList({ business }) {
-    const [businessList, setBusinessList] = useState([])
+function BusinessDetail({ params }) {
+    const { status } = useSession()
+    const [business, setBusiness] = useState([])
+
     useEffect(() => {
-        business && getBusinessList()
-    }, [business])
+        params && getbusinessById()
+    }, [params])
 
-    const getBusinessList = () => {
-        GlobalApi.getBusinessByCategory(business?.category?.name).then(
-            (resp) => {
-                setBusinessList(resp?.businessLists)
-            }
-        )
+    useEffect(() => {
+        checkUserAuth()
+    }, [])
+
+    const getbusinessById = () => {
+        GlobalApi.getBusinessById(params.businessId).then((resp) => {
+            setBusiness(resp.businessList)
+        })
+    }
+
+    const checkUserAuth = () => {
+        if (status == 'loading') {
+            return <p>Loading...</p>
+        }
+
+        if (status == 'unauthenticated') {
+            signIn('descope')
+        }
     }
 
     return (
-        <div className="md:pl-10">
-            <BookingSection business={business}>
-                <Button
-                    className="flex gap-1 items-center justify-start"
-                    style={{ minWidth: '150px' }}
-                >
-                    <NotebookPen className="flex-shrink-0" />
-                    <span className="whitespace-nowrap">Book Appointment</span>
-                </Button>
-            </BookingSection>
+        status == 'authenticated' &&
+        business && (
+            <div className="py-8 md:py-20 px-10 md:px-36">
+                <BusinessInfo business={business} />
 
-            <div className="md:block mb-12 mt-10 sm:mt-0 sm:mb-0">
-                <h2
-                    className="font-bold 
-text-lg my-3
-"
-                >
-                    Similar Businesses
-                </h2>
-                <div className="">
-                    {businessList &&
-                        businessList.map((business, index) => (
-                            <Link
-                                href={'/details/' + business.id}
-                                className="flex lg:flex-row flex-col gap-2 mb-4
-    hover:border rounded-lg
-    cursor-pointer hover:shadow-md
-     border-primary"
-                            >
-                                <Image
-                                    src={business?.images[0].url}
-                                    alt={business.name}
-                                    width={80}
-                                    height={80}
-                                    className="rounded-lg object-cover h-auto sm:h-[100px] w-full sm:w-auto"
-                                />
-                                <div className="flex flex-col justify-center">
-                                    <h2 className="font-bold text-xs sm:text-sm">
-                                        {business.name}
-                                    </h2>
-                                    <h2 className="text-primary text-xs sm:text-sm">
-                                        {business.contactPerson}
-                                    </h2>
-                                    <h2 className="text-gray-400 text-xs sm:text-sm hidden sm:block">
-                                        {business.address}
-                                    </h2>
-                                </div>
-                            </Link>
-                        ))}
+                <div className="grid grid-cols-3 mt-16">
+                    <div className="col-span-3 md:col-span-2 order-last md:order-first">
+                        <BusinessDescription business={business} />
+                    </div>
+                    <div className="">
+                        <SuggestedBusinessList business={business} />
+                    </div>
                 </div>
             </div>
-        </div>
+        )
     )
 }
 
-export default SuggestedBusinessList
+export default BusinessDetail

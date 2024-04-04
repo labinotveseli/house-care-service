@@ -1,3 +1,4 @@
+import React from 'react'
 import './globals.css'
 import Header from './_components/Header'
 import NextAuthSessionProvider from './provider'

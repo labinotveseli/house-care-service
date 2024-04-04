@@ -1,22 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { Calendar, Clock, MapPin, User } from 'lucide-react'
-import Image from 'next/image'
 import React from 'react'
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger
-} from '@/components/ui/alert-dialog'
+import Image from 'next/image'
+import { Calendar, Clock, MapPin, User } from 'lucide-react'
 import GlobalApi from '@/app/_services/GlobalApi'
 import { toast } from 'sonner'
 
-function BookingHistoryList({ bookingHistory, type }) {
+function BookingHistoryList({ bookingHistory }) {
     const cancelAppointment = (booking) => {
         GlobalApi.deleteBooking(booking.id).then(
             (resp) => {
@@ -24,7 +12,7 @@ function BookingHistoryList({ bookingHistory, type }) {
                     toast('Booking Canceled Successfully!')
                 }
             },
-            (e) => {
+            () => {
                 toast('Error canceling the booking!')
             }
         )
@@ -33,7 +21,7 @@ function BookingHistoryList({ bookingHistory, type }) {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
             {bookingHistory.map((booking, index) => (
-                <div className="flex mb-5">
+                <div key={booking.id} className="flex mb-5">
                     <div
                         key={index}
                         className="p-4 shadow-md rounded-lg hover:shadow-lg cursor-pointer hover:shadow-primary hover:scale-105 transition-all ease-in-out"

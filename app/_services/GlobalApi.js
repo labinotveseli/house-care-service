@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+
 const { gql, default: request } = require('graphql-request')
 
 const MASTER_URL =
@@ -53,9 +55,9 @@ const getBusinessByCategory = async (category) => {
         gql`
     query BusinessByCategory {
         businessLists(where: {category: 
-            {name: "` +
+            {name: '` +
         category +
-        `"}}) {
+        `'}}) {
           about
           address
           category {
@@ -79,9 +81,9 @@ const getBusinessById = async (id) => {
     const query =
         gql`
   query GetBusinessById {
-    businessList(where: {id: "` +
+    businessList(where: {id: '` +
         id +
-        `"}) {
+        `'}) {
       about
       address
       category {
@@ -112,17 +114,17 @@ const createNewBooking = async (
         gql`
   mutation CreateBooking {
     createBooking(
-      data: {bookingStatus: Booked, businessList: {connect: {id: "` +
+      data: {bookingStatus: Booked, businessList: {connect: {id: ' ` +
         businessId +
-        `"}}, date: "` +
+        ` '}}, date: '` +
         date +
-        `", time: "` +
+        ` ', time: ' ` +
         time +
-        `", userEmail: "` +
+        ` ', userEmail: ' ` +
         userEmail +
-        `", userName: "` +
+        ` ', userName: ' ` +
         userName +
-        `"}
+        ` '}
     ) {
       id
     }
@@ -140,11 +142,11 @@ const BusinessBookedSlot = async (businessId, date) => {
         gql`
   query BusinessBookedSlot {
     bookings(where: {businessList: 
-      {id: "` +
+      {id: ' ` +
         businessId +
-        `"}, date: "` +
+        ` '}, date: '` +
         date +
-        `"}) {
+        ` '}) {
       date
       time
     }
@@ -160,9 +162,9 @@ const GetUserBookingHistory = async (userEmail) => {
     query GetUserBookingHistory {
       bookings(
         orderBy: publishedAt_DESC
-        where: {userEmail: "` +
+        where: {userEmail: '` +
         userEmail +
-        `"}
+        `'}
       ) {
         businessList {
           name
@@ -185,9 +187,9 @@ const deleteBooking = async (bookingId) => {
     const mutationQuery =
         gql`
   mutation DeleteBooking {
-    deleteBooking(where: {id: "` +
+    deleteBooking(where: {id: '` +
         bookingId +
-        `"}) {
+        `'}) {
       id
     }
   }

@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { NotebookPen } from 'lucide-react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import GlobalApi from '@/app/_services/GlobalApi'
 
 function SearchResultList({ searchQuery, searchResults }) {
     return (
