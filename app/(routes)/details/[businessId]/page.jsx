@@ -1,3 +1,5 @@
+'use client'
+
 import GlobalApi from '@/app/_services/GlobalApi'
 import { Button } from '@/components/ui/button'
 import { NotebookPen } from 'lucide-react'
