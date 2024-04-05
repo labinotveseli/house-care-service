@@ -1,11 +1,11 @@
 /* eslint-disable quotes */
 
-const { gql, default: request } = require('graphql-request')
+const { gql, default: request } = require("graphql-request")
 
 const MASTER_URL =
-    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/' +
+    "https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/" +
     process.env.NEXT_PUBLIC_MASTER_URL_KEY +
-    '/master'
+    "/master"
 
 const getCategory = async () => {
     const query = gql`
@@ -51,32 +51,30 @@ const getAllBusinessList = async () => {
 }
 
 const getBusinessByCategory = async (category) => {
-  const query = gql`
-  query BusinessByCategory($categoryName: String!) {
-      businessLists(where: {category: 
-          {name: $categoryName}}) {
-        about
-        address
-        category {
-          name
+    const query = gql`
+        query BusinessByCategory($categoryName: String!) {
+            businessLists(where: { category: { name: $categoryName } }) {
+                about
+                address
+                category {
+                    name
+                }
+                contactPerson
+                email
+                id
+                name
+                images {
+                    url
+                }
+            }
         }
-        contactPerson
-        email
-        id
-        name
-        images {
-          url
-        }
-      }
+    `
+    const variables = {
+        categoryName: category
     }
-    `;
-  const variables = {
-      categoryName: category
-  };
-  const result = await request(MASTER_URL, query, variables);
-  return result;
+    const result = await request(MASTER_URL, query, variables)
+    return result
 }
-
 
 const getBusinessById = async (id) => {
     const query =
@@ -109,7 +107,7 @@ const createNewBooking = async (
     date,
     time,
     userEmail,
-    userName
+    userName,
 ) => {
     const mutationQuery =
         gql`
