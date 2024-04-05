@@ -40,31 +40,24 @@ function Header() {
         >
             <div className="flex items-center xl:gap-[480px] gap-24">
                 <Link href="/" passHref>
-                        <Image
-                            src="/logo.svg"
-                            alt="logo"
-                            width={50}
-                            height={50}
-                        />
+                    <Image src="/logo.svg" alt="logo" width={50} height={50} />
                 </Link>
                 <div className="md:flex items-center gap-6 hidden justify-center flex-grow">
-                    <Link
-                        href={"/"}
-                        className="focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-gray-50 cursor-pointer px-6 py-3 font-semibold text-primary text-md leading-3 shadow-md rounded transition-colors hover:bg-sky-300 hover:text-zinc-700"
-                    >
-                        Home
-                    </Link>
-                    <button
+                    <Link href="/" passHref>
+                        <Button className="w-24 focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-primary cursor-pointer font-semibold text-white text-md leading-3 transition-colors hover:bg-sky-300 hover:text-zinc-700">
+                            Home
+                        </Button>
+                    </Link>     
+                    <Button
                         onClick={handleScrollToServices}
-                        className="focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-gray-50 cursor-pointer px-6 py-3 font-semibold text-primary text-md leading-3 shadow-md rounded transition-colors hover:bg-sky-300 hover:text-zinc-700"
+                        className="w-24 focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-primary cursor-pointer font-semibold text-white text-md leading-3 transition-colors hover:bg-sky-300 hover:text-zinc-700"
                     >
                         Services
-                    </button>
-                    <Link
-                        href={"/about"}
-                        className="focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-gray-50 cursor-pointer px-6 py-3 font-semibold text-md text-primary leading-3 shadow-md rounded transition-colors hover:bg-sky-300 hover:text-zinc-700"
-                    >
-                        About
+                    </Button>
+                    <Link href="/about" passHref>
+                        <Button className="w-24 focus:outline-none focus:ring-1 focus:ring-offset-1 border border-white bg-primary cursor-pointer font-semibold text-md text-white leading-3 transition-colors hover:bg-sky-300 hover:text-zinc-700">
+                            About
+                        </Button>
                     </Link>
                 </div>
             </div>

@@ -26,7 +26,7 @@ function BusinessList({ businessList, title }) {
                                       className='h-[200px] md:h-[200px] sm:h-[200px] object-cover rounded-t-lg'
                                   />
                                   <div className='flex flex-col items-baseline p-3 gap-1 flex-1'>
-                                      <h2 className='p-1 bg-purple-200 text-primary rounded-lg px-2 text-[12px]'>
+                                      <h2 className='p-1 border bg-gray-50 border-gray-200 shadow-sm text-zinc-700 font-medium rounded-lg px-2 text-[12px]'>
                                           {business.category.name}
                                       </h2>
                                       <h2 className='font-bold text-lg'>
@@ -41,7 +41,7 @@ function BusinessList({ businessList, title }) {
                                   </div>
                               </div>
                               <div className='mt-auto'>
-                                  <Button className='rounded-md mt-4 mb-2 ml-2'>
+                                  <Button className='rounded-md mt-4 mb-2 ml-2 hover:bg-purple-800'>
                                       Book Now
                                   </Button>
                               </div>
