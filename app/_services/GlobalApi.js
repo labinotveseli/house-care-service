@@ -51,31 +51,32 @@ const getAllBusinessList = async () => {
 }
 
 const getBusinessByCategory = async (category) => {
-    const query =
-        gql`
-    query BusinessByCategory {
-        businessLists(where: {category: 
-            {name: '` +
-        category +
-        `'}}) {
-          about
-          address
-          category {
-            name
-          }
-          contactPerson
-          email
-          id
+  const query = gql`
+  query BusinessByCategory($categoryName: String!) {
+      businessLists(where: {category: 
+          {name: $categoryName}}) {
+        about
+        address
+        category {
           name
-          images {
-            url
-          }
+        }
+        contactPerson
+        email
+        id
+        name
+        images {
+          url
         }
       }
-      `
-    const result = await request(MASTER_URL, query)
-    return result
+    }
+    `;
+  const variables = {
+      categoryName: category
+  };
+  const result = await request(MASTER_URL, query, variables);
+  return result;
 }
+
 
 const getBusinessById = async (id) => {
     const query =
