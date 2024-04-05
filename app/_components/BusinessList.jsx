@@ -23,7 +23,7 @@ function BusinessList({ businessList, title }) {
                                       alt={business.name}
                                       width={500}
                                       height={200}
-                                      className='h-[150px] md:h-[200px] sm:h-[200px] object-cover rounded-t-lg'
+                                      className='h-[200px] md:h-[200px] sm:h-[200px] object-cover rounded-t-lg'
                                   />
                                   <div className='flex flex-col items-baseline p-3 gap-1 flex-1'>
                                       <h2 className='p-1 bg-purple-200 text-primary rounded-lg px-2 text-[12px]'>

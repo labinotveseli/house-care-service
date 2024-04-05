@@ -12,7 +12,7 @@ function CategoryList({ categoryList }) {
                     <Link
                         href={'/search/' + category.name}
                         key={index}
-                        className={`flex flex-col items-center justify-center gap-2 bg-purple-100 p-4 rounded-lg cursor-pointer hover:scale-110 transition-all ease-in-out`}
+                        className={`flex flex-col items-center justify-center gap-2 border bg-gray-50 border-gray-100 shadow p-4 rounded-lg cursor-pointer hover:scale-110 hover:bg-sky-300 transition-all ease-in-out`}
                     >
                         <Image
                             src={category.icon.url}
@@ -20,13 +20,13 @@ function CategoryList({ categoryList }) {
                             width={35}
                             height={35}
                         />
-                        <h2 className='text-primary'>{category.name}</h2>
+                        <h2 className='text-zinc-700 font-semibold'>{category.name}</h2>
                     </Link>
                 ))
                 : [1, 2, 3, 4, 5, 6].map((item, index) => (
                     <div
                         key={index}
-                        className='h-[120px] w-full bg-slate-200 animate-pulse rounded-md'
+                        className='h-[120px] w-full bg-gray-100 animate-pulse rounded-md'
                     ></div>
                 ))}
         </div>
