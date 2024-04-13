@@ -1,4 +1,4 @@
-/* eslint-disable quotes */
+/* eslint-disable */
 
 const { gql, default: request } = require("graphql-request")
 
@@ -50,80 +50,62 @@ const getAllBusinessList = async () => {
     return result
 }
 
-const getBusinessByCategory = async (category) => {
-    const query = gql`
-        query BusinessByCategory($categoryName: String!) {
-            businessLists(where: { category: { name: $categoryName } }) {
-                about
-                address
-                category {
-                    name
-                }
-                contactPerson
-                email
-                id
-                name
-                images {
-                    url
-                }
-            }
+const getBusinessByCategory=async(category)=>{
+  const query=gql`
+  query MyQuery {
+      businessLists(where: {category: 
+          {name: "`+category+`"}}) {
+        about
+        address
+        category {
+          name
         }
-    `
-    const variables = {
-        categoryName: category
+        contactPerson
+        email
+        id
+        name
+        images {
+          url
+        }
+      }
     }
-    const result = await request(MASTER_URL, query, variables)
-    return result
+    `
+    const result=await request(MASTER_URL,query)
+    return result;
 }
 
-const getBusinessById = async (id) => {
-    const query =
-        gql`
-  query GetBusinessById {
-    businessList(where: {id: '` +
-        id +
-        `'}) {
-      about
-      address
-      category {
-        name
-      }
-      contactPerson
-      email
-      id
+const getBusinessById=async(id)=>{
+const query=gql`
+query GetBusinessById {
+  businessList(where: {id: "`+id+`"}) {
+    about
+    address
+    category {
       name
-      images {
-        url
-      }
+    }
+    contactPerson
+    email
+    id
+    name
+    images {
+      url
     }
   }
-  `
-    const result = await request(MASTER_URL, query)
-    return result
+}
+`
+const result=await request(MASTER_URL,query)
+    return result;
 }
 
-const createNewBooking = async (
-    businessId,
-    date,
-    time,
-    userEmail,
-    userName,
-) => {
-    const mutationQuery =
-        gql`
+const createNewBooking=async(businessId,date,time,userEmail,userName)=>{
+  const mutationQuery=gql`
   mutation CreateBooking {
     createBooking(
-      data: {bookingStatus: Booked, businessList: {connect: {id: ' ` +
-        businessId +
-        ` '}}, date: '` +
-        date +
-        ` ', time: ' ` +
-        time +
-        ` ', userEmail: ' ` +
-        userEmail +
-        ` ', userName: ' ` +
-        userName +
-        ` '}
+      data: {bookingStatus: Booked, 
+        businessList: {connect: {id: "`+businessId+`"}},
+         date: "`+date+`", time: "`+time+`", 
+         userEmail: "`+userEmail+`",
+          userName: "`+userName+`"}
     ) {
       id
     }
@@ -132,54 +114,46 @@ const createNewBooking = async (
     }
   }
   `
-    const result = await request(MASTER_URL, mutationQuery)
-    return result
+  const result=await request(MASTER_URL,mutationQuery)
+  return result;
 }
 
-const BusinessBookedSlot = async (businessId, date) => {
-    const query =
-        gql`
+const BusinessBookedSlot=async(businessId,date)=>{
+  const query=gql`
   query BusinessBookedSlot {
     bookings(where: {businessList: 
-      {id: ' ` +
-        businessId +
-        ` '}, date: '` +
-        date +
-        ` '}) {
+      {id: "`+businessId+`"}, date: "`+date+`"}) {
       date
       time
     }
   }
   `
-    const result = await request(MASTER_URL, query)
-    return result
+  const result=await request(MASTER_URL,query)
+  return result;
 }
 
-const GetUserBookingHistory = async (userEmail) => {
-    const query =
-        gql`
-    query GetUserBookingHistory {
-      bookings(
-        orderBy: publishedAt_DESC
-        where: {userEmail: '` +
-        userEmail +
-        `'}
-      ) {
-        businessList {
-          name
-          images {
-            url
-          }
-          contactPerson
-          address
+const GetUserBookingHistory=async(userEmail)=>{
+  const query=gql`
+  query GetUserBookingHistory {
+    bookings(where: {userEmail: "`+userEmail+`"}
+    orderBy: publishedAt_DESC) {
+      businessList {
+        name
+        images {
+          url
         }
-        date
-        time
+        contactPerson
+        address
       }
+      date
+      time
+      id
     }
+  }
   `
-    const result = await request(MASTER_URL, query)
-    return result
+  const result=await request(MASTER_URL,query)
+  return result;
+
 }
 
 const deleteBooking = async (bookingId) => {

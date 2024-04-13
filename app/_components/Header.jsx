@@ -12,7 +12,7 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import Navbar from '@/components/ui/navBar'
+
 
 function Header() {
     const { data } = useSession()
@@ -39,7 +39,7 @@ function Header() {
             className='py-5 px-5 md:px-16 shadow-md flex justify-between items-center
     '
         >
-            <Navbar />
+            
             <div className='flex items-center xl:gap-[480px] gap-24'>
                 <Link href='/' passHref>
                     <Image src='/logo.svg' alt='logo' width={50} height={50} />
